@@ -2,7 +2,7 @@
 	<div class="navContainer">
 		<ul class="navList">
 			<li class="navItem active">
-				<router-link to="/recommend">推荐</router-link>
+				<router-link to="/">推荐</router-link>
 			</li>
 			<li class="navItem">
 				<router-link to="/rank">排行榜</router-link>
