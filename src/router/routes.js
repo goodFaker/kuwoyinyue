@@ -5,7 +5,8 @@ export default  [
       path: "/", 
       name: "Recommend",
       component: () =>
-      import("../views/Recommend/Recommend")
+      import("../views/Recommend/Recommend"),
+      
     },
     {
         path: "/rank",
