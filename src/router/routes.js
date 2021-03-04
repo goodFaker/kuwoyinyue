@@ -4,14 +4,16 @@ export default  [
     {
       path: "/", 
       name: "Recommend",
-      component: Recommend
+      component: Recommend,
+      exact:true
     },
     {
         path: "/rank",
         name: "Rank",
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/Rank/Rank")
+          import(/* webpackChunkName: "about" */ "../views/Rank/Rank"),
       },
+      
       {
         path: "/singer",
         name: "Singer",
@@ -24,5 +26,9 @@ export default  [
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/Song/Song")
       },
+      {
+        path:'/',
+        redirect:'/'
+      }
 
   ];

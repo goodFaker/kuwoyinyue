@@ -1,6 +1,6 @@
 <template>
-    <div id="RecommendContainer">
-        <ul>
+    <div id="recommendContainer">
+        <ul class="list">
             <li>我是今日推荐</li>
             <li>我是今日推荐</li>
             <li>我是今日推荐</li>
@@ -16,6 +16,6 @@ name:'Recommend'
 }
 </script>
 
-<style    rel='stylesheet/less'  >
-    
+<style  lang='less'  rel='stylesheet/less' >
+  
 </style>
