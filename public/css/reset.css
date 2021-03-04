@@ -76,5 +76,18 @@ html { overflow-y: scroll; }
 }
 
 .router-link-active {
-    color: red;
+    color:black;
+    font-size: 16px;
+    font-weight: bold;
+    position: relative;
+}
+.router-link-active::after{
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 1px;
+    width: 100%;
+    height: 6px;
+    background: #ffe443;
+    z-index: -1;
 }
