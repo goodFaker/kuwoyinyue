@@ -1,14 +1,12 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 
-// import {
-//     Dialog,
-//     Pagination,
-//     Button
-// } from 'element-ui'
+import {
+    Message
+} from 'element-ui'
 
-// Vue.use(Dialog)
-// Vue.use(Pagination)
-// Vue.use(Button)
+Vue.use(Message)
+
+Vue.prototype.$message = Message
 
 
 // Vue.prototype.$Dialog=Dialog

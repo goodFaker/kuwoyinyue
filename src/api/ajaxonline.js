@@ -2,7 +2,7 @@ import axios from 'axios'
 import nprogress from 'nprogress'
 
 const ajax = axios.create({
-    baseURL:'/api',
+    baseURL:'/online',
     timeout:20000
 })
 /* 设置请求拦截器 */

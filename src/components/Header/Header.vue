@@ -4,7 +4,7 @@
 			<div class="header-left">
 				<img class="headerimg" src="./img/lg.png" />
 				<ul>
-					<li class="active"><a>发现音乐</a></li>
+					<li class="active"  @click="$router.push('/')"><a>发现音乐</a></li>
 					<li><a>下载客户端</a></li>
 					<li><a>音乐现场</a></li>
 					<li><a>VIP会员</a></li>
@@ -18,34 +18,55 @@
 				</ul>
 			</div>
 			<div class="header-right">
-				<div class="header-right-input"><input type="text" /></div>
+				<div class="header-right-input"><input type="text" @keydown.13="handleToSearch" v-model="keyWord"/></div>
 				<div class="header-right-text">
-					<span>登录</span>
+					<span @click="showLogin = true" class="toLogin">登录</span>
 					<span>/</span>
-					<span>注册</span>
+					<span @click="$router.push('/register')">注册</span>
 				</div>
 			</div>
 		</div>
+		<Login v-if="showLogin" @closeLogin="closeLogin"></Login>
 	</header>
 </template>
 
 <script>
+import Login from '../Login/Login'
 export default {
 	name: 'Header',
+	data() {
+		return {
+			showLogin:false,
+			keyWord:''
+		}
+	},
+	components:{
+		Login
+	},
+	methods:{
+		closeLogin(){
+			this.showLogin=false
+		},
+		handleToSearch(){
+			this.$router.push({path:'/search',query:{keyWord:this.keyWord}})
+		}
+	}
 }
 </script>
 
-<style  rel='stylesheet' scoped >
+<style lang="less" rel='stylesheet' scoped >
 /* 头部部分 */
 .container {
 	box-sizing: border-box;
 	margin: 0 auto;
-  padding: 0 120px;
+	padding: 0 120px;
+	
 }
 
 .index-header {
 	border-bottom: 1px solid #666;
 }
+
 
 .header-bg {
 	height: 67px;
@@ -113,6 +134,9 @@ export default {
 .header-right-text {
 	line-height: 67px;
 	font-size: 14px;
+	span{
+		cursor: pointer;
+	}
 }
 
 /* 主体部分 */
