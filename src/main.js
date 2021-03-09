@@ -6,11 +6,17 @@ import '@/mock'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import '@/plugins/swiper'
+
 import * as API from '@/api'
 
 import HeaderNav from './components/Header/Header'
+import Footer from './components/Footer/Footer'
+
 
 Vue.component('HeaderNav',HeaderNav)
+Vue.component('Footer',Footer)
+
 
 Vue.use(ElementUI)
 

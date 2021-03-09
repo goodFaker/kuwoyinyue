@@ -11,7 +11,22 @@ export default [
     name: 'Rank',
     component: () => import('../views/Rank/Rank'),
   },
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('../views/Search/Search'),
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/Register/register'),
+  },
 
+  {
+    path: '/playdetail',
+    name: 'playdetail',
+    component: () => import('../views/playdetail/playdetail'),
+  },
   {
     path: '/singer',
     name: 'Singer',
@@ -23,23 +38,12 @@ export default [
     component: () => import('../views/Song/Song'),
   },
   {
-    path: '/search',
-    name: 'search',
-    component: () => import('../views/Search/Search'),
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('../views/Register/register'),
-  },
-  
-  {
-    path:'/playdetail',
-    name:'playdetail',
-    component:() => import('../views/playdetail/playdetail')
+    path: '/songdetail',
+    name: 'SongDetail',
+    component: () => import('../views/SongDetail/SongDetail'),
   },
   {
     path: '/',
     redirect: '/',
-  }
+  },
 ]

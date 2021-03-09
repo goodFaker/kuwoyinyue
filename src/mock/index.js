@@ -1,6 +1,7 @@
+//引入mock
 import Mock from 'mockjs'
-
-import songList from './songList.json'
-
-
-Mock.mock('/mock/songList',{code:200,data:songList})
+import allSinger from './allSinger.json'
+import playListInfo from './playListInfo.json'
+Mock.mock('/mock/allsinger',{code:200,data:allSinger})
+Mock.mock('/mock/playListInfo',{code:200,data:playListInfo})
+// console.log('执行了mock')

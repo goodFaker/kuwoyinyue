@@ -38,6 +38,7 @@ export default {
 		return {
 			showLogin:false,
 			keyWord:''
+			
 		}
 	},
 	components:{
@@ -117,6 +118,7 @@ export default {
 .header-right-input {
 	line-height: 67px;
 	padding-right: 20px;
+
 }
 
 .header-right-input input {
@@ -129,6 +131,7 @@ export default {
 	background-repeat: no-repeat;
 	background-position: 7px;
 	padding-left: 34px;
+	outline: none;
 }
 
 .header-right-text {

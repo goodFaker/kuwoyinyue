@@ -5,6 +5,7 @@
 			<NavBar v-if="showNavBar"></NavBar>
 			<router-view></router-view>
 		</div>
+		<Footer/>
 	</div>
 </template>
 

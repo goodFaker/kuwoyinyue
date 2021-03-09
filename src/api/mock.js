@@ -20,7 +20,7 @@ ajax.interceptors.request.use(config=>{
 ajax.interceptors.response.use(response=>{
   // 隐藏进度条
   Nprogress.done()
-  return response.data
+  return response
 },error=>{
   // 隐藏进度条
   Nprogress.done()
