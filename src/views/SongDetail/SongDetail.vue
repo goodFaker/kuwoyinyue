@@ -66,7 +66,6 @@ export default {
 <style lang="less" rel="stylesheet/less" scoped>
 .outer {
   /* position:relative; */
-  width: 1400px;
   margin: 0 auto;
   padding: 0px 120px;
   // border: 1px solid red;

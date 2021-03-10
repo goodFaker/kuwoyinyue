@@ -82,7 +82,7 @@
 						style="width: 100%"
 					>
 						<el-table-column
-							type="index"
+							type="index"	
 							label="序号"
 							width="204.547"
 							style="color: red"
@@ -312,7 +312,6 @@ export default {
 
 <style  lang='less'  rel='stylesheet/less' scoped >
 .main {
-	width: 1400px;
 	margin: 38px auto;
 	display: flex;
 	justify-content: space-between;

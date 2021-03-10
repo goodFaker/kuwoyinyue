@@ -15,9 +15,7 @@ const actions={
     //异步获取全部歌手列表
     async reqArtistList({commit}, {category}){
         const result = await reqArtistList(category)
-        
-        
-            commit('RECEIVE_ARTISTLIST',result)
+        commit('RECEIVE_ARTISTLIST',result)
         
     },
     //异步获取全部歌手分类信息

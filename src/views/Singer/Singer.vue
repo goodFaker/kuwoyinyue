@@ -110,7 +110,6 @@ computed:{
 
 <style  lang='less'  rel='stylesheet/less' scoped >
     .outer{
-        width: 1400px;
         height: 100%;
         // border: 1px solid green;
         padding: 0px 120px;

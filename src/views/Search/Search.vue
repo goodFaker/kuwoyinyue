@@ -51,6 +51,14 @@
 						</template>
 					</el-table-column>
 					<el-table-column label="歌曲" width="220" prop="name">
+						<template slot-scope="scope">
+							<div
+								class="songName"
+								@click="handlePlay(scope.$index)"
+							>
+								<span>{{ scope.row.name }}</span>
+							</div>
+						</template>
 					</el-table-column>
 					<el-table-column prop="artist" label="歌手" width="220">
 					</el-table-column>
@@ -80,50 +88,62 @@
 </template>
 
 <script>
-import { reqSearchData } from '@/api/index'
-
+// import { reqSearchData } from '@/api/index'
+import { mapState } from 'vuex'
 export default {
 	name: 'Search',
 
 	data() {
 		return {
 			keyWord: '',
-			searchList: [],
 			total: null,
-			page:1,
-			limit:30
+			page: 1,
+			limit: 30,
 		}
 	},
 	mounted() {
-		this.getSearchResult()
+		this.getSearchResult(this.page)
 	},
 	methods: {
 		/* 获取搜索结果 */
-		async getSearchResult(page,limit=30) {
+		async getSearchResult(page, limit = 30) {
 			const { keyWord } = this.$route.query
 			this.keyWord = keyWord
-			const searchObj = await reqSearchData(keyWord,page,limit)
-			this.searchList = searchObj.list
-			this.total = searchObj.total * 1
+			this.$store.dispatch('getSearchList', { keyWord, page, limit })
+			this.total = 100
 		},
 		/* 当页面改变的时候触发的函数 */
-		handleCurrentChange(page){
-			this.page=page
+		handleCurrentChange(page) {
+			this.page = page
 			this.getSearchResult(page)
-			window.scrollTo(0,0)
-		}
+			window.scrollTo(0, 0)
+		},
+		handlePlay(index) {
+			const { artist, rid, pic ,album, name} = this.searchList[index]
+			const palyDetail = {
+				artist,
+				rid,
+				pic,
+				album,
+				name
+			}
+			sessionStorage.setItem('music',JSON.stringify(palyDetail))
+			this.$router.push('/playdetail')
+		},
 	},
-	computed:{
-		startIndex(){
-			return (this.page-1)*this.limit + 1
-		}
+	computed: {
+		startIndex() {
+			return (this.page - 1) * this.limit + 1
+		},
+		...mapState({
+			searchList: (state) => state.search.searchList,
+		}),
 	},
-	watch:{
-		$route(to,from){
-			
+	watch: {
+		$route() {
 			this.getSearchResult()
-		}
-	}
+		},
+	},
 }
 </script>
 

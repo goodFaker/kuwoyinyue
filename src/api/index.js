@@ -8,7 +8,6 @@ import serve from '@/api/ajaxonline'
 export const reqSearchData = (keyWord, pn = 1, rn = 30) =>
   ajax.get(`/search/searchMusicBykeyWord?key=${keyWord}&pn=${pn}&rn=${rn}`)
 
-
 export const getRegister = (phone, psw) =>
   ajax.post('/register', { phone, psw })
 
@@ -47,7 +46,17 @@ export const wellMusicList = () => ajax.get(`/playList_tags`)
 //歌手详情页面信息
 export const reqPlayListInfo = () => ajaxMock.get(`/playListInfo`)
 
-export const reqRank = () => ajax.get('/rank');
-export const reqMusic = (sourceid,page) => ajax.get(`/rank/musicList?bangId=${sourceid}&pn=${page}`);
-export const reqComment = (page, sourceid) => ajax.get(`/comment?type=get_rec_comment&f=web&page=${page}&rows=20&digest=2&sid=${sourceid}&uid=0`)
-export const reqComment1 = (page, sourceid) => ajax.get(`/comment?type=get_comment&f=web&page=${page}&rows=20&digest=2&sid=${sourceid}&uid=0`)
+export const reqRank = () => ajax.get('/rank')
+export const reqMusic = (sourceid, page) =>
+  ajax.get(`/rank/musicList?bangId=${sourceid}&pn=${page}`)
+export const reqComment = (page, sourceid) =>
+  ajax.get(
+    `/comment?type=get_rec_comment&f=web&page=${page}&rows=20&digest=2&sid=${sourceid}&uid=0`
+  )
+export const reqComment1 = (page, sourceid) =>
+  ajax.get(
+    `/comment?type=get_comment&f=web&page=${page}&rows=20&digest=2&sid=${sourceid}&uid=0`
+  )
+
+  /* 获取播放连接的接口 */
+  export const reqPlayInfo =(rid)=> serve.get(`url?rid=${rid}`)
