@@ -5,7 +5,7 @@
       <div class="song-list">
         <span @click="showChosenList"
           >精选歌单
-          <i class="iconfont icon-bar_icon_arrow_"></i>
+          
         </span>
       </div>
       <div class="newest">
@@ -51,10 +51,11 @@
         <li v-for="song in defaultList" :key="song.id" @click="toSongDetail">
           <div class="imgContainer">
             <div class="mask"></div>
-            <img class="musicImg" :src="song.img" alt="" />
+            <i class="sui-icon icon-touch-play"></i>
+            <img class="musicImg" v-lazy="song.img" alt="" />
           </div>
           <span class="descContent">{{ song.name }}</span>
-          <span class="playNum">{{ song.listencnt }}</span>
+          <span class="playNum">{{ song.listencnt > 10000 ? (song.listencnt/10000).toFixed(1) + '万' : song.listencnt }}</span>
         </li>
       </ul>
     </div>
@@ -286,14 +287,28 @@ export default {
           z-index: 100;
         }
         .musicImg {
+          position: relative;
           width: 100%;
+          transition: all 0.2s ease-in-out;
+        }
+        .icon-touch-play{
+          position: absolute;
+          font-size: 60px;
+          left:50%;
+          top: 50%;
+          color: #bfa;
+          transform: translate(-50%,-50%);
+          z-index: 999;
+          display: none;
         }
         &:hover {
           .musicImg {
-            transform: scale(1.1);
-            transition: all 0.5s ease-in-out;
+             transform: scale(1.1);
           }
           .mask {
+            display: block;
+          }
+          .icon-touch-play{
             display: block;
           }
         }

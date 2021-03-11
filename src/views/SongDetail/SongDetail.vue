@@ -53,7 +53,8 @@ export default {
   },
   async mounted() {
     const result = await this.$API.reqPlayListInfo()
-    this.playListInfo = result.data[0]
+    // console.log(result)
+    this.playListInfo = result.data.data[0]
   },
   methods: {
     indexMethod(index) {

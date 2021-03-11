@@ -36,8 +36,8 @@ export const reqradioList = () => ajax.get(`/radio`)
 //获取分类歌手信息
 export const reqAllSingerList = () => ajaxMock.get(`/allsinger`)
 // 获取歌手页面全部歌手
-export const reqArtistList = (category) =>
-  ajax.get(`/singer?category=${category}&rn=100&pn=1`)
+export const reqArtistList = (category,pageSize,pageNo) =>
+  ajax.get(`/singer?category=${category}&rn=${pageSize}&pn=${pageNo}`)
 //获取默认歌单数据
 export const reqDefaultList = (order) =>
   ajax.get(`/playList?order=${order}&rn=30&pn=1`)

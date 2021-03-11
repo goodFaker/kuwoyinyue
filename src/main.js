@@ -5,7 +5,7 @@ import store from './store'
 import '@/mock'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-
+import '@/plugins/lazyload'
 import '@/plugins/swiper'
 
 import * as API from '@/api'

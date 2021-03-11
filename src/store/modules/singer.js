@@ -21,8 +21,8 @@ const actions={
     //异步获取全部歌手分类信息
     async reqAllSingerList({commit}){
         const result = await reqAllSingerList()
-        if(result.code===200){
-            commit('RECEIVE_ALLSINGER_LIST',result.data)
+        if(result.data.code===200){
+            commit('RECEIVE_ALLSINGER_LIST',result.data.data)
         }
     }
 }

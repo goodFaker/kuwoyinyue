@@ -13,6 +13,23 @@
             <li class="bigLetter">H</li>
             <li class="bigLetter">I</li>
             <li class="bigLetter">J</li>
+            <li class="bigLetter">K</li>
+            <li class="bigLetter">L</li>
+            <li class="bigLetter">M</li>
+            <li class="bigLetter">N</li>
+            <li class="bigLetter">O</li>
+            <li class="bigLetter">P</li>
+            <li class="bigLetter">Q</li>
+            <li class="bigLetter">R</li>
+            <li class="bigLetter">S</li>
+            <li class="bigLetter">T</li>
+            <li class="bigLetter">U</li>
+            <li class="bigLetter">V</li>
+            <li class="bigLetter">W</li>
+            <li class="bigLetter">X</li>
+            <li class="bigLetter">Y</li>
+            <li class="bigLetter">Z</li>
+            <li class="bigLetter">#</li>
         </ul>
         <!-- 全部 -->
         <ul class="all">
@@ -27,7 +44,7 @@
             <ul class="singerList">
                 <li v-for="singer in mainSingerList" :key="singer.id">
                     <div class="listItem">
-                    <img class="itemImg" :src="singer.pic" alt="">
+                    <img class="itemImg" v-lazy="singer.pic" alt="">
                     <span class="itemText">{{singer.name}}</span>
                     <span class="itemNum">{{singer.musicNum}}首歌曲</span>
                     </div>
@@ -38,16 +55,18 @@
             <li class="otherListItem"
             v-for="otherSinger in otherSingerList" :key="otherSinger.id"
             >
-                <img class="img" :src="otherSinger.pic" alt="">
+                <img class="img" v-lazy="otherSinger.pic" alt="">
                 <span class="singer">{{otherSinger.name}}</span>
             </li>
         </ul>
-        <el-pagination
-  :page-size="20"
-  :pager-count="11"
-  layout="prev, pager, next"
-  :total="1000">
-</el-pagination>
+                <el-pagination
+						background
+						layout="prev, pager, next"
+						:total="artistList.length"
+						@current-change="handleSizeChange"
+						:page-size="20"
+					>
+					</el-pagination>
     </div>
 </template>
 
@@ -58,53 +77,50 @@ name:'Singer',
   data() {
     return {
         currentId:'0',//当前点击的歌手分类id
+        artistList:[],//全部歌手信息列表
         mainSingerList:[],//上面展示的十条数据
         otherSingerList:[],//下面展示的剩余数据
-        pageNo: 1, // 默认第一页的数据,页码是1
-        pageSize: 100, // 默认每页显示的条数
+        category:'0',//歌手分类列表id
+        pageNo: '1', // 默认第一页的数据,页码是1
+        pageSize: '100', // 默认每页显示的条数
     }
   },
 computed:{
     ...mapState({
-        artistList:(state)=>state.singer.artistList,
         allSingerList:state=>state.singer.allSingerList
     })
 },
    mounted(){
-       this.$store.dispatch('reqAllSingerList')
-      this.mainSingerList = this.artistList.slice(0,10)
-      this.otherSingerList = this.artistList.slice(10)
-      
+       //获取歌手分类列表
+    this.$store.dispatch('reqAllSingerList')
+    //挂载完毕获取歌手列表
+    this.reqSingerList(this.category,this.pageSize, this.pageNo)
    },
     methods:{
-      async handleSinger(category){
-        this.currentId = category
-        await this.$store.dispatch('reqArtistList',{category})
-
+        //获取歌手列表
+      async reqSingerList(category,pageSize, pageNo){
+          //保存每次传进来的参数
+          this.category = category
+          this.pageSize = pageSize
+          this.pageNo = pageNo
+       const result = await this.$API.reqArtistList(category,pageSize,pageNo)
+       //请求回来的列表
+        this.artistList = result.artistList
+        //上面的大图十条数据
+        this.mainSingerList = this.artistList.slice(0,10)
+        //下面的小图数据
+       this.otherSingerList = this.artistList.slice(10)
        },
-       getArtistList(){
-
+       //点击分页器发送请求刷新页面
+       handleSizeChange(val){
+           this.reqSingerList(this.category,this.pageSize,val)
+       },
+       //点击歌手分类刷新页面
+       handleSinger(id){
+           this.currentId = id
+           this.reqSingerList(id,this.pageSize,this.pageNo)
        }
    },
-   watch:{
-          currentId:{
-         async handler(currentId){  
-             let {category} = this.$route.query
-             if(currentId!=category){
-            this.$router.replace(`/singer?category=${currentId}`)
-            await this.$store.dispatch('reqArtistList',{category:currentId})
-              this.mainSingerList = this.artistList.slice(0,10)
-             this.otherSingerList = this.artistList.slice(10)
-            }else{
-               await this.$store.dispatch('reqArtistList',{category})
-             this.mainSingerList = this.artistList.slice(0,10)
-             this.otherSingerList = this.artistList.slice(10)
-            }
-
-           },
-           immediate:true,
-       }
-   }
 }
 </script>
 
@@ -212,4 +228,54 @@ computed:{
             }
         }
     }
+</style>
+
+<style>
+/* 分页器样式 */
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+	background-color: #ffdf1f;
+	color: #333;
+	font-weight: 300px;
+}
+
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .btn-prev {
+	margin: 0 5px;
+	background-color: #fff;
+	color: #333;
+	min-width: 30px;
+	border-radius: 2px;
+}
+
+.el-pagination.is-background .el-pager li {
+	margin: 0 5px;
+	background-color: #fff;
+	color: #999;
+	min-width: 30px;
+	border-radius: 2px;
+	font-size: 14px;
+}
+
+.el-pagination.is-background .btn-next.disabled,
+.el-pagination.is-background .btn-next:disabled,
+.el-pagination.is-background .btn-prev.disabled,
+.el-pagination.is-background .btn-prev:disabled,
+.el-pagination.is-background .el-pager li.disabled {
+	color: #333;
+}
+
+.el-pagination .btn-next .el-icon,
+.el-pagination .btn-prev .el-icon {
+	display: block;
+	font-size: 16px;
+	font-weight: 300;
+}
+
+.el-pagination {
+	width: 500px;
+	font-size: 14px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
 </style>
